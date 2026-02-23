@@ -22,7 +22,11 @@ enum Method
 }
 
 function get_server_http_method() : ?Method {
-	switch (strtolower(filter_input(INPUT_SERVER, 'REQUEST_METHOD'))) {
+	$method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+	if (!$method) {
+		return null;
+	}
+	switch (strtolower($method)) {
 		case 'get':
 			return Method::GET;
 		case 'post':

@@ -8,5 +8,8 @@
             "rm -rf public/bootstrap",
             "cp -R vendor/twbs/bootstrap/dist public/bootstrap"
         ]
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1"
     }
 }
