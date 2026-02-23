@@ -51,21 +51,21 @@ if (!$http_method) {
 }
 
 include_directory_recursive(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'app');
-foreach (get_declared_classes() as $controller) {
-	if (!is_subclass_of($controller, Controller::class)) {
+foreach (get_declared_classes() as $class) {
+	if (!is_subclass_of($class, Controller::class)) {
 		continue;
 	}
 
-	$reflectionClass = new ReflectionClass($controller);
+	$reflectionClass = new ReflectionClass($class);
 	$methods = $reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC);
 	foreach ($methods as $method) {
-		$reflectionMethod = new ReflectionMethod($controller, $method->getName());
+		$reflectionMethod = new ReflectionMethod($class, $method->getName());
 		
 		$attributes = $reflectionMethod->getAttributes(Route::class);
 		foreach ($attributes as $attribute) {
 			$args_matched = $attribute->newInstance()->match($http_method, $uri);
 			if ($args_matched !== false) {
-				$controller = new $controller();
+				$controller = new $class;
 				try {
 					$controller->{$method->getName()}(...$args_matched);
 				} catch (Exception $e) {
