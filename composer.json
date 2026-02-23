@@ -1,4 +1,12 @@
 {
     "name": "pppg/simple-web-framework",
-    "require": {}
+    "require": {
+        "twbs/bootstrap": "^5.3"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "rm -rf public/bootstrap",
+            "cp -R vendor/twbs/bootstrap/dist public/bootstrap"
+        ]
+    }
 }
