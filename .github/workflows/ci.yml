@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6
+        with:
+          args: --ignore-platform-reqs
+
+      - name: PHPStan
+        uses: php-actions/phpstan@v3
+        with:
+          path: app/ public/
+          level: 10
