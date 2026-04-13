@@ -29,3 +29,20 @@ function get_server_http_method() : ?Method {
 			return null;
 	}
 }
+
+function get_http_method_display_name(Method $method) : string {
+	switch ($method) {
+		case Method::GET:
+			return 'get';
+		case Method::POST:
+			return 'post';
+		case Method::PUT:
+			return 'put';
+		case Method::DELETE:
+			return 'delete';
+		case Method::UPDATE:
+			return 'update';
+		default:
+			throw new InternalErrorException('Invalid http method provided');
+	}
+}
