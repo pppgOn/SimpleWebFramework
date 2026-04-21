@@ -8,6 +8,14 @@ function include_directory_recursive(string $path) : void {
 	$files = array_diff(scandir($path), array('.', '..'));
 	foreach ($files as $file) {
 		$filepath = $path . DIRECTORY_SEPARATOR . $file;
+		if (is_link($filepath)) {
+			$link = readlink($filepath);
+			if (!$link) {
+				throw new InternalErrorException('Failed to read a link while including directories');
+			}
+			$filepath = $path . DIRECTORY_SEPARATOR . $link;
+		}
+
 		if (is_dir($filepath)) {
 			include_directory_recursive($filepath);
 		} else if (preg_match('%\.php$%', $file)) {
