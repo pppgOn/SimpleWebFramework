@@ -49,22 +49,8 @@ sudo a2enmod rewrite
 sudo service apache2 restart
 ```
 
-### Install
-
-In your project directory:
-
-```shell
-cd /var/www/
-sudo -u www-data git clone --recursive git@github.com:pppgOn/SimpleWebFramework.git
-mkdir controllers
-cd SimpleWebFramework/
-sudo -u www-data composer install
-cd app/
-sudo -u www-data ln -s ../../controllers .
-```
-
 ### Environment
-At the root of the framework, create a `.env` file based on this template:
+At the root of your project, create a `.env` file based on this template:
 
 ```shell
 DATABASE_NAME="<DB_NAME>"
@@ -72,6 +58,25 @@ DATABASE_HOST="<DB_HOST>"
 DATABASE_PORT=3306
 DATABASE_USERNAME="<DB_USERNAME>"
 DATABASE_PASSWORD="<DB_PASSWORD>"
+```
+
+### Install
+
+In your project directory:
+
+```shell
+git clone --recursive git@github.com:pppgOn/SimpleWebFramework.git
+cd SimpleWebFramework/
+composer install
+cd ../
+mkdir controllers js css templates
+cd SimpleWebFramework/public/
+ln -s ../../js .
+ln -s ../../css .
+cd ../app/
+ln -s ../../controllers .
+cd ../
+ln -s ../.env .
 ```
 
 ## Usage
@@ -86,7 +91,7 @@ Here is a simple example of a controller you can create:
 <?php
 require_once FRAMEWORK_APP_ROOT . DIRECTORY_SEPARATOR . 'BootstrapController.php';
 
-class TestController extends BootstrapController {
+class MyController extends BootstrapController {
 	#[Route(Method::GET, 'test/(?<id>[1-9][0-9]*)')]
 	public function route_with_params(int $id) : void {
 		echo 'route with this parameter: ' . strval($id);
@@ -95,6 +100,22 @@ class TestController extends BootstrapController {
 	#[Route(Method::GET, 'db/users')]
 	public function test_db() : void {
 		var_dump(db\execute('SELECT * FROM user')->fetchAll());
+	}
+}
+```
+
+### Style and scripts
+To include styles and scripts, fill the `stylesheet` and `scripts` variables of the bootstrap controller:
+
+```php
+<?php
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Controller.php';
+
+class MyController extends BootstrapController {
+	public function __construct() {
+		array_push($this->stylesheets, 'css/my_stylesheet.css');
+		array_push($this->scripts, 'js/my_script.js');
+		parent::__construct();
 	}
 }
 ```
