@@ -51,10 +51,16 @@ sudo service apache2 restart
 
 ### Install
 
+In your project directory:
+
 ```shell
 cd /var/www/
-sudo -u www-data git clone git@github.com:pppgOn/SimpleWebFramework.git
+sudo -u www-data git clone --recursive git@github.com:pppgOn/SimpleWebFramework.git
+mkdir controllers
+cd SimpleWebFramework/
 sudo -u www-data composer install
+cd app/
+sudo -u www-data ln -s ../../controllers .
 ```
 
 ### Environment
@@ -72,7 +78,7 @@ DATABASE_PASSWORD="<DB_PASSWORD>"
 
 ### Controllers
 
-The framework is based on controllers. You must create all of your controllers as childs of basics contoller (`Controller` or `BootstrapController`).
+The framework is based on controllers. You must create all of your controllers as childs of basics contoller (`Controller` or `BootstrapController`) in the controllers directory.
 
 Here is a simple example of a controller you can create:
 
