@@ -54,10 +54,14 @@ foreach (get_declared_classes() as $class) {
 						http_response_code(500);
 						// TODO: show message
 					}
+				} finally {
+					die();
 				}
 			}
 		}
 	}
 }
+
+echo '404 not found'; // TODO: show 404 message
 
 ?>
