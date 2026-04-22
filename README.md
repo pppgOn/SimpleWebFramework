@@ -77,6 +77,7 @@ cd ../app/
 ln -s ../../controllers .
 cd ../
 ln -s ../.env .
+ln -s ../templates .
 ```
 
 ## Usage
