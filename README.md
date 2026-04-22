@@ -120,6 +120,24 @@ class MyController extends BootstrapController {
 }
 ```
 
+### Templates
+Templates are HTTP writter helper with the `.tpl` extension. You can write HTML code inside it dynamic variables.
+
+Inside a controller, you can open a template using the template class and replace `{{variable}}` with your own value:
+```php
+<?php
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'BootstrapController.php';
+
+class MyController extends BootstrapController {
+	#[Route(Method::GET, 'template')]
+	public function test_template() : void {
+		$template = new Template('my_template_name');
+		$template->set('variable', get_variable_value_from_db());
+		echo $template;
+	}
+}
+```
+
 ### Database
 
 The framework include a database wrapper wich you can use in the `db` namespace. The database wrapper is based on [PDO](https://www.php.net/manual/fr/book.pdo.php).
