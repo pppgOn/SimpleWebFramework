@@ -13,7 +13,7 @@ class BootstrapController extends Controller {
 
 		$stylesheets_html = '';
 		foreach ($this->stylesheets as $stylesheet) {
-			$stylesheets_html .= '<link href="/' . $stylesheet .'" rel="stylesheet"/>';
+			$stylesheets_html .= '<link href="' . $stylesheet .'" rel="stylesheet"/>';
 		}
 
 		echo '<!doctype html>' .
@@ -28,7 +28,7 @@ class BootstrapController extends Controller {
 
 	function __destruct() {
 		foreach($this->scripts as $script) {
-			echo '<script src="/' . $script .'"></script>';
+			echo '<script src="' . $script .'"></script>';
 		}
 		echo '</body></html>';
 	}

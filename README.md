@@ -115,8 +115,8 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'BootstrapController.php';
 
 class MyController extends BootstrapController {
 	public function __construct() {
-		array_push($this->stylesheets, 'css/my_stylesheet.css');
-		array_push($this->scripts, 'js/my_script.js');
+		array_push($this->stylesheets, '/css/my_stylesheet.css');
+		array_push($this->scripts, '/js/my_script.js');
 		parent::__construct();
 	}
 }
