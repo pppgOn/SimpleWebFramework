@@ -73,6 +73,7 @@ mkdir controllers js css templates
 cd SimpleWebFramework/public/
 ln -s ../../js .
 ln -s ../../css .
+ln -s ../../images .
 cd ../app/
 ln -s ../../controllers .
 cd ../
