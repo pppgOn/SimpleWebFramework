@@ -3,10 +3,10 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'Controller.php';
 
 class BootstrapController extends Controller {
 	/** @var array<string> $stylesheets */
-	protected array $stylesheets = array('bootstrap/css/bootstrap.min.css');
+	protected array $stylesheets = array('/bootstrap/css/bootstrap.min.css');
 
 	/** @var array<string> $scripts */
-	protected array $scripts = array('bootstrap/js/bootstrap.min.js');
+	protected array $scripts = array('/bootstrap/js/bootstrap.min.js');
 	protected string $accept;
 
 	public function __construct() {
